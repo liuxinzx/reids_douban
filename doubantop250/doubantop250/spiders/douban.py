@@ -3,15 +3,23 @@ import scrapy
 import  re
 
 from scrapy.http import HtmlResponse
+from scrapy_redis.spiders import RedisSpider
 
 from doubantop250.items import Doubantop250Item
 
 
 
-class DoubanSpider(scrapy.Spider):
+class DoubanSpider(RedisSpider):
     name = 'douban'
-    allowed_domains = ['douban.com']
-    start_urls = ['https://movie.douban.com/top250']
+    # allowed_domains = ['douban.com']
+    # start_urls = ['https://movie.douban.com/top250']
+
+    redis_key = 'test1'
+
+    def __init__(self, *args, **kwargs):
+        domain = kwargs.pop('domain','')
+        self.allowed_domains = list( filter(None, domain.split(',')) )
+        super(DoubanSpider, self).__init__(*args, **kwargs)
 
     def parse(self, response):
 
