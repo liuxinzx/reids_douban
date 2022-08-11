@@ -20,7 +20,9 @@ SCHEDULER_PERSIST = True
 
 ITEM_PIPELINES = {
     # 'example.pipelines.ExamplePipeline': 300,
-    'scrapy_redis.pipelines.RedisPipeline': 400,
+'scrapy_redis.pipelines.RedisPipeline': 300,
+    'doubantop250.pipelines.DbPipeline': 400,
+
 }
 REDIS_URL = "redis://127.0.0.1:6379"
 
@@ -29,6 +31,12 @@ REDIS_URL = "redis://127.0.0.1:6379"
 # Introduce an artifical delay to make use of parallelism. to speed up the
 # crawl.
 DOWNLOAD_DELAY = 1
+
+SQL_Host = '127.0.0.1'
+SQL_User = 'root'
+SQL_Password = '123456'
+SQL_Database = 'py'
+SQL_PORT = 3306
 
 
 
